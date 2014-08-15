@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Entry utils cases</title>
+  <link rel="stylesheet" href="qunit/qunit.css">
+</head>
+<body>
+
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+
+
+  <script src="qunit/qunit.js"></script>
+  <!--Dependency-->
+  <script src="../lib/jquery-1.11.0.min.js"></script>
+  <!--Test target-->
+  <script src="_utils.js"></script>
+  <script type="text/javascript">
+
+  if (window.location.protocol === 'file:') {
+   alert("Please run this test case in server mode.e.g: http://localhost:8080/static/test/_utils_test.html");
+  }
+
+  QUnit.test("test load result", function(assert){
+	  assert.ok(TestUtils.loadHtmlObj("../../downloader.html").html().indexOf('<title>File Downloader</title>') > 0, 'Entire html is loaded.' );
+
+	  assert.ok(TestUtils.loadHtmlObj("../../downloader.html #main").attr('id') === 'main',  'Parts of html is loaded.ID is main.' );
+	  assert.ok(TestUtils.loadHtmlObj("../../downloader.html #main").length === 1,  'Search by ID should always return length == 1' );
+	  assert.ok(TestUtils.loadHtmlObj("../../downloader.html div").length === 3,  'Contains 3 divs in page' );
+  });
+
+  </script>
+</body>
+</html>

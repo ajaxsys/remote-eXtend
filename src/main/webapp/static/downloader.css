@@ -1,0 +1,49 @@
+#path {
+	width: 600px;
+	height: 22px;
+	font-size: 16px;
+	font-family: cursive, sans-serif
+}
+
+#fileListTemplate {
+	display: none;
+	border: 1px #808080 solid;
+	width: 710px;
+	text-align: left;
+	color: gray;
+}
+
+#showMessage {
+	height: 20px;
+}
+
+#showMessage #messageIndent {
+	display: inline;
+	visibility: hidden;
+}
+
+#showMessage #showMessageBar {
+	display: inline;
+	background-color: yellow;
+	font-size: 16px;
+	font-family: cursive, sans-serif
+}
+
+#fileListTemplate a {
+	text-decoration: none;
+	color: gray;
+}
+
+#fileListTemplate a:hover {
+	color: black;
+}
+
+#fileListRowTemplate {
+	display: none;
+}
+
+#path {
+	border: 0px;
+	border-bottom: 1px solid #808080;
+	outline: none;
+}

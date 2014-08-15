@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="./static/downloader.css" />
+<title>File Downloader</title>
+</head>
+<body>
+<div id='main'>
+	<form id='cmdForm' method='post' action='#'>
+		&gt; <input id='path' type='text'
+			placeholder='Type file path, then press `TAB` to list files' />
+		<input type='button' id='goParent' value='↑' />
+		<input type='submit' value='Down It!' />
+	</form>
+
+	<div id='showMessage'>
+		<span id='messageIndent'>&gt; </span> <span id='showMessageBar'></span>
+	</div>
+	<div id='showResult'></div>
+
+	<table id='fileListTemplate'>
+		<tr>
+			<th>name</th>
+			<th>size</th>
+			<th>last modified</th>
+		</tr>
+		<tr id='fileListRowTemplate'>
+			<td><a class='fileName' href="#"></a></td>
+			<td class='fileSize'></td>
+			<td class='fileLastModified'></td>
+		</tr>
+	</table>
+</div>
+
+	<script type="text/javascript" src="./static/lib/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript"
+		src="./static/lib/jquery.fileDownload.js"></script>
+	<script type="text/javascript" src="./static/downloader.js"></script>
+
+</body>
+</html>

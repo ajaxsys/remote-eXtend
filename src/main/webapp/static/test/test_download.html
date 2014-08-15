@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Download test cases</title>
+  <link rel="stylesheet" href="qunit/qunit.css">
+</head>
+<body>
+
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+
+  <div id='main'>
+    <form id='cmdForm' method='post' action='#'>
+      &gt; <input id='path' type='text'
+        placeholder='Type file path, then press `TAB` to list files' />
+      <input type='button' id='goParent' value='↑' />
+      <input type='submit' value='Down It!' />
+    </form>
+
+    <div id='showMessage'>
+      <span id='messageIndent'>&gt; </span> <span id='showMessageBar'></span>
+    </div>
+    <div id='showResult'></div>
+
+    <table id='fileListTemplate'>
+      <tr>
+        <th>name</th>
+        <th>size</th>
+        <th>last modified</th>
+      </tr>
+      <tr id='fileListRowTemplate'>
+        <td><a class='fileName' href="#"></a></td>
+        <td class='fileSize'></td>
+        <td class='fileLastModified'></td>
+      </tr>
+    </table>
+  </div>
+
+  <script src="qunit/qunit.js"></script>
+  <!--Dependency-->
+  <script src="../lib/jquery-1.11.0.min.js"></script>
+  <script src="../lib/jquery.fileDownload.js"></script>
+  <script src="qunit/jquery.mockjax.js"></script>
+  <!--Test target-->
+  <script src="../downloader.js"></script>
+  <!--Test code-->
+  <script src="downloader.js"></script>
+</body>
+</html>

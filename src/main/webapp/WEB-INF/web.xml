@@ -1,0 +1,32 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+		<display-name>Archetype Created Web Application</display-name>
+		<!-- <servlet> <servlet-name>shell-exec</servlet-name> <servlet-class>exec.shell.RunnerServlet</servlet-class>
+				</servlet> <servlet-mapping> <servlet-name>shell-exec</servlet-name> <url-pattern>/shell</url-pattern>
+				</servlet-mapping> -->
+
+		<servlet>
+				<servlet-name>H2Console</servlet-name>
+				<servlet-class>org.h2.server.web.WebServlet</servlet-class>
+				<init-param>
+						<param-name>webAllowOthers</param-name>
+						<param-value></param-value>
+				</init-param>
+		</servlet>
+		<servlet>
+				<servlet-name>FileDownloader</servlet-name>
+				<servlet-class>exec.download.FileDownloadServlet</servlet-class>
+		</servlet>
+		<servlet>
+				<servlet-name>APP_Dispacher</servlet-name>
+				<servlet-class>exec.download.DispacherServlet</servlet-class>
+		</servlet>
+
+		<servlet-mapping>
+				<servlet-name>APP_Dispacher</servlet-name>
+				<url-pattern>/dspch/*</url-pattern>
+		</servlet-mapping>
+</web-app>

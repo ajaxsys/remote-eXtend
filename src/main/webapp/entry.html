@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="./static/entry.css">
+<title>Entry</title>
+</head>
+<body>
+
+	<div id='main'>
+		<p id='messege'>※アプリＩＤを再選択する場合は、ブラウザを再起動する必要あります。</p>
+		<p>
+			<span>セキュリティコード：</span><input type='text' id='secureCode'
+				value='1fa4798d67e83ca12eee5cf6be2f2917' />
+		</p>
+		<p>
+			<span>アクセスアプリＩＤ：</span> <select id='appID'>
+				<option value=''>---Select One---</option>
+				<option value='FileDownloader'>FileDownloader</option>
+				<option value='H2Console'>H2Console</option>
+			</select>
+		</p>
+		<button id='entry'>エントリー</button>
+	</div>
+
+	<script type="text/javascript" src="./static/lib/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="./static/lib/jquery.cookie.js"></script>
+	<script type="text/javascript" src="./static/entry.js"></script>
+
+</body>
+</html>

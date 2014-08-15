@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Entry test cases</title>
+  <link rel="stylesheet" href="qunit/qunit.css">
+</head>
+<body>
+
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  
+  <div id='main'>
+    <p id='messege'>※アプリＩＤを再選択する場合は、ブラウザを再起動する必要あります。</p>
+    <p>
+      <span>セキュリティコード：</span><input type='text' id='secureCode'
+        value='1fa4798d67e83ca12eee5cf6be2f2917' />
+    </p>
+    <p>
+      <span>アクセスアプリＩＤ：</span> <select id='appID'>
+        <option value=''>---Select One---</option>
+        <option value='FileDownloader'>FileDownloader</option>
+        <option value='H2Console'>H2Console</option>
+      </select>
+    </p>
+    <button id='entry'>エントリー</button>
+  </div>
+
+  <script src="qunit/qunit.js"></script>
+  <!--Dependency-->
+  <script src="../lib/jquery-1.11.0.min.js"></script>
+  <script src="../lib/jquery.cookie.js"></script>
+  <!--Test target-->
+  <script src="../entry.js"></script>
+  <!--Test code-->
+  <script src="entry.js"></script>
+</body>
+</html>
