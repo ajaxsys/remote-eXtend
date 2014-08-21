@@ -81,8 +81,7 @@ asyncTest( 'DL.ls - Success, while press tab with parts of file path', function(
 	});
 });
 
-
-var case_2_input = 'd:/tmp_not_exist';
+var case_2_input = 'd:/tmp_403_path';
 
 $.mockjax({
   url: '/dspch',
@@ -159,6 +158,31 @@ asyncTest( 'DL.ls - Success, single file list in folder', function( assert ) {
 	});
 });
 
+
+
+var case_5_input = 'd:/file_not_exist';
+
+$.mockjax({
+  url: '/dspch',
+  data: { filepath: case_5_input },
+  responseTime: 1,
+  responseText: "",
+});
+asyncTest( 'DL.ls - Success, but NONE file return.', function( assert ) {
+
+	expect(2);
+
+	var inputPath = case_5_input;
+
+	DL.ls(inputPath, function onSuccess(fileList){
+		assert.equal(fileList, "", 'NONE responsed');
+		start();
+
+		var autoComplete = DL.autoCompleteCmd(fileList, inputPath);
+		assert.equal(autoComplete, case_5_input, 'File autocompleted, NO changed');
+
+	});
+});
 
 
 

@@ -206,7 +206,8 @@ function Downloader(){
 			var filePath = getFullPath(cols[0], inputPath);
 			pathPrefix = getAutoCompletePath(pathPrefix, filePath);
 		}
-		return pathPrefix;
+//		return pathPrefix;
+		return pathPrefix ? pathPrefix : inputPath;
 
 	}
 
