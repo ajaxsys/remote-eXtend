@@ -53,6 +53,10 @@ public class DispacherServlet extends HttpServlet {
 		String appID = null;
 		// Secure check
 		Cookie[] cookies = req.getCookies();
+		if (cookies==null){
+			return null;
+		}
+
 		boolean isPassed = false;
 		for (Cookie cookie : cookies) {
 			if (SECURE_KEY.equals(cookie.getName())

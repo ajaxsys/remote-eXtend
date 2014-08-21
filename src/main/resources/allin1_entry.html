@@ -164,19 +164,22 @@
 
 	// Support context for test 
 	'init' : function(context){
+		if (this._isInit) { // Only one
+			return;
+		}
+
 		context = context || document;
 
 		this.$appId = $('#appID', context);
 		this.$secureCode = $('#secureCode', context);
-		this.isInit = true;
+		this._isInit = true;
 	},
 
-	// DOM event. NOTICE: `this` keyword refereced to DOM object
+	// DOM event. NOTICE: `this` keyword refereced to DOM object, so must use $.proxy() to redefine `this`.
 	'click' : function() {
-		var E = Entry;
-		if (!E.isInit) { // For test
-			E.init();
-		}
+		var E = this;
+		E.init();
+
 		var code = E.$secureCode.val(), appId = E.$appId.val();
 
 		if (E.validate(code, appId)){
@@ -216,7 +219,7 @@
 
 
 $(function() {
-	$("#entry").click(Entry.click);
+	$("#entry").click($.proxy(Entry.click, Entry));
 }); // End dom ready
 </script>
 
