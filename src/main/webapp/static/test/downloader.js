@@ -8,23 +8,26 @@
 
 // Check protocal
 if (window.location.protocol === 'file:') {
-	alert('Please run this test case in server mode.e.g: http://localhost:8080/static/test/test_downloader.html');
+	alert('Please run this test case in server mode.e.g: http://localhost:9876/static/test/test_downloader.html');
 }
+// Real Ajax test need cookie info
+$.cookie("SECURE_KEY", "efa4798d67e83ca12eee5cf6be2f2917", { path : '/' });
+$.cookie("APP_ID", "FileDownloader", { path : '/' });
 
 var DL = Downloader();
 
 var singleResp = 'tmp/	8192	Mon Aug 11 15:50:07 JST 2014',
 	singleFileResp = 'tree.txt	164633	Mon Aug 11 15:50:07 JST 2014',
-	multiResp = 
-	'tmp1/	4096	Wed Aug 06 18:48:30 JST 2014\n' + 
-	'tree - abc.txt	5	Fri Aug 01 17:12:58 JST 2014\n' + 
-	'tree - あいうえ (16).txt	5	Fri Aug 01 17:12:58 JST 2014\n' + 
-	'tree - コピー.txt	5	Fri Aug 01 17:12:58 JST 2014\n' + 
-	'tree - 中国话 (17).txt	5	Fri Aug 01 17:12:58 JST 2014\n' + 
-	'tree - 日本語 (18).txt	5	Fri Aug 01 17:12:58 JST 2014\n' + 
-	'tree - 日本語中国话 (19).txt	5	Fri Aug 01 17:12:58 JST 2014\n' + 
-	'tree.log	5	Fri Aug 01 17:12:58 JST 2014\n' + 
-	'tree.txt	164633	Mon Aug 11 15:50:07 JST 2014\n' + 
+	multiResp =
+	'tmp1/	4096	Wed Aug 06 18:48:30 JST 2014\n' +
+	'tree - abc.txt	5	Fri Aug 01 17:12:58 JST 2014\n' +
+	'tree - あいうえ (16).txt	5	Fri Aug 01 17:12:58 JST 2014\n' +
+	'tree - コピー.txt	5	Fri Aug 01 17:12:58 JST 2014\n' +
+	'tree - 中国话 (17).txt	5	Fri Aug 01 17:12:58 JST 2014\n' +
+	'tree - 日本語 (18).txt	5	Fri Aug 01 17:12:58 JST 2014\n' +
+	'tree - 日本語中国话 (19).txt	5	Fri Aug 01 17:12:58 JST 2014\n' +
+	'tree.log	5	Fri Aug 01 17:12:58 JST 2014\n' +
+	'tree.txt	164633	Mon Aug 11 15:50:07 JST 2014\n' +
 	'tree_result.txt	167766	Mon Aug 11 15:50:15 JST 2014\n'
 	;
 
@@ -170,7 +173,8 @@ asyncTest( 'DL.ls - Success, single file list in folder', function( assert ) {
 /****************************************************
  * Test Real AJAX
  ****************************************************/
-module('Test with real Ajax (Make sure http server is on)');
+module('Test with real Ajax (Make sure http server is on, and cookies be set on entry.html)');
+
 
 asyncTest( 'DL.ls - Success, while press tab with file path auto complete', function( assert ) {
 
@@ -180,7 +184,7 @@ asyncTest( 'DL.ls - Success, while press tab with file path auto complete', func
 
 	DL.ls(inputPath, function onSuccess(fileList){
 		// -1 because contains a new line mark at end of file)
-		assert.equal(11, fileList.split('\n').length - 1, '11 file returned');
+		assert.equal(fileList.split('\n').length - 1, 11,  '11 file returned');
 		start();
 
 		var autoComplete = DL.autoCompleteCmd(fileList, inputPath);
@@ -272,14 +276,14 @@ function clear(){
 test( 'DL.ui.util.formatLsFileList - show file list & test link event', function( assert ) {
 
 	var $table1 = DL.ui.util.formatLsFileList(singleResp, 'd:/tm');
-	
+
 	ok($table1 instanceof jQuery, 'table is a jQuery object');
 	equal( $table1.find('tr').length - 2 , 1 , 'table is should be append 1 row');
 	equal( $table1.find('a#file_0').attr('href')  , 'd:/tmp/' , 'table is should be append 1 row');
 
 
 	var $table2 = DL.ui.util.formatLsFileList(multiResp, 'd:/tmp/');
-	
+
 	ok($table2 instanceof jQuery, 'table is a jQuery object');
 	equal( $table2.find('tr').length - 2 , 10 , 'table is should be append 9 row');
 	equal( $table2.find('a#file_0').attr('href')  , 'd:/tmp/tmp1/' , 'test 1st link');
@@ -301,13 +305,13 @@ test( 'DL.ui.util.formatLsFileList - show file list & test link event', function
 
 
 test( 'DL.ui.doHashChanged - ui changed when url changed', function( assert ) {
-	
+
 	// var $main = $('#main').clone().removeAttr('id');
 	// var $fixture = $( "#qunit-fixture" );
 	// $fixture.append($main);
 
 	// NOTICE: use mock still must test in async mode!
-	
+
 
 	// this event trigger by patterns bellow:
 	// - Folder with like `d:/tmp` is clicked
@@ -322,7 +326,7 @@ test( 'DL.ui.doHashChanged - ui changed when url changed', function( assert ) {
 
 });
 
-// Bind events to 
+// Bind events to
 DL.bindEvent();
 
 

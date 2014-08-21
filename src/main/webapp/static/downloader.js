@@ -12,10 +12,11 @@ function Downloader(){
 		return new Downloader();
 
 	var DL = this;
-	// public method
+	// private option OR methods
 	DL._async = true;
 	DL._relocate = relocate;
 
+	// public method
 	DL.ls = ls;
 	DL.dl = dl;
 	DL.autoCompleteCmd = autoCompleteCmd;
@@ -34,7 +35,7 @@ function Downloader(){
 	}
 
 
-	var $path = $('#path'), $msg = $('#showMessageBar'), $form = $('#cmdForm'), $result = $('#showResult'), 
+	var $path = $('#path'), $msg = $('#showMessageBar'), $form = $('#cmdForm'), $result = $('#showResult'),
 		$tableTmplt = $('#fileListTemplate'), $rowTmplt = $('#fileListRowTemplate'), $goParent = $('#goParent');
 	var DEFAULT_ACTION = '/dspch';
 	var THIS_URL = SERVER_URL = (location.origin + location.pathname);
@@ -180,7 +181,7 @@ function Downloader(){
 				'filepath' : path
 			},
 			dataType : 'text',
-			async: DL._async===false ? false : true, 
+			async: DL._async===false ? false : true,
 		});
 		if (onSuccess){
 			req.done(onSuccess);
@@ -243,13 +244,13 @@ function Downloader(){
 			$('.fileName', $row).text(cols[0])
 				.attr('id', 'file_' + i)
 				.attr('href', filePath)
-				.click(   doTriggerTab    ); 
+				.click(   doTriggerTab    );
 
 			$('.fileSize', $row).text(cols[1]);
 			$('.fileLastModified', $row).text(cols[2]);
 			$table.append($row.show());
 		}
-		
+
 		$result.empty().append($table.show()).show();
 
 		return $table;
@@ -273,10 +274,10 @@ function Downloader(){
 	}
 
 	function pushHistory(href) {
-		// Must call from DL! 
-		// [NG]this.relocate: this==link obj  
+		// Must call from DL!
+		// [NG]this.relocate: this==link obj
 		// [NG]relocate: always referenct to original relocate, because it's a closure
-		DL._relocate( '#' + encodeURIComponent(href) ); 
+		DL._relocate( '#' + encodeURIComponent(href) );
 	}
 
 	function relocate(subUrl){
