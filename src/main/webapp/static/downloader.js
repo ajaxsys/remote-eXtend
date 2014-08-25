@@ -39,7 +39,7 @@ function Downloader(){
 		$tableTmplt = $('#fileListTemplate'), $rowTmplt = $('#fileListRowTemplate'), $goParent = $('#goParent');
 	var DEFAULT_ACTION = '/dspch';
 	var THIS_URL = SERVER_URL = (location.origin + location.pathname);
-	var req;
+	var req, _lastReqResult;
 
 	// For test by direct link
 	if (SERVER_URL.endsWith('\.html')){
@@ -75,8 +75,14 @@ function Downloader(){
 			$path.attr('autocomplete', 'off');
 			// Only autocomplete while press tab key
 			$path.data('enableAutoComplete', 'auto');
-			// show ls command in hash changed event
-			pushHistory($path.val());
+
+	        var subUrl = '#' + encodeURIComponent($path.val());
+			if (window.location.href === THIS_URL + subUrl){
+				showLsFileResult();
+			} else {
+				// show ls command in hash changed event
+				pushHistory($path.val());
+			}
 
 			// Stop original tab event
 			return false;
@@ -129,10 +135,15 @@ function Downloader(){
 	}
 
 	function showLsFileResult(text){
+		// For last result cache
+		text = text || _lastReqResult;
+		_lastReqResult = text;
+
 		var thisPath = $path.val();
 		formatLsFileList(text, thisPath);
 		if ($path.data('enableAutoComplete')){
 			doAutoComplete(text, thisPath);
+			$path.data('enableAutoComplete', null);
 		}
 	}
 
