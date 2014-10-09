@@ -9,15 +9,19 @@ function Downloader(){
         return new Downloader();
 
     var DL = this;
+
     // public method
     DL.init = init;
+    // private method
+    DL._relocate = relocate;
+    // Methods for test
     registTestHook();
 
     var $path = $('#path'), $msg = $('#showMessageBar'), $form = $('#cmdForm'), $result = $('#showResult'),
         $tableTmplt = $('#fileListTemplate'), $rowTmplt = $('#fileListRowTemplate'), $goParent = $('#goParent');
     var DEFAULT_ACTION = '/dspch';
     var THIS_URL = SERVER_URL = (location.protocol + "//" + location.host + location.pathname);
-    var req, _lastReqResult;
+    var req;
 
     // For test by direct link
     if (SERVER_URL.endsWith('\.html')){
@@ -120,10 +124,6 @@ function Downloader(){
     }
 
     function showLsFileResult(text){
-        // For last result cache
-        text = text || _lastReqResult;
-        _lastReqResult = text;
-
         var thisPath = $path.val();
         formatLsFileList(text, thisPath);
         if ($path.data('enableAutoComplete')){
@@ -324,7 +324,6 @@ function Downloader(){
             return;
         // (regist for test only) option OR methods
         DL._async = true;
-        DL._relocate = relocate;
         DL.ls = ls;
         DL.dl = dl;
         DL.autoCompleteCmd = autoCompleteCmd;
