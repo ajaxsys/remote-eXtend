@@ -7,8 +7,8 @@ pushd src\main\webapp\
 call htm21 downloader.html
 call htm21 entry.html
 
-if NOT EXIST "allin1_downloader.html" (
-	echo Please install `htm21` command(from cmd-eXtend)
+if NOT EXIST allin1_downloader.html (
+	echo Please install `htm21` command [from cmd-eXtend]
 	goto end
 )
 popd

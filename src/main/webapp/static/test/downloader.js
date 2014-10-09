@@ -10,6 +10,7 @@
 if (window.location.protocol === 'file:') {
 	alert('Please run this test case in server mode.e.g: http://localhost:9876/static/test/test_downloader.html');
 }
+
 // Real Ajax test need cookie info
 $.cookie("SECURE_KEY", "efa4798d67e83ca12eee5cf6be2f2917", { path : '/' });
 $.cookie("APP_ID", "FileDownloader", { path : '/' });
@@ -204,7 +205,7 @@ asyncTest( 'DL.ls - Success, while press tab with file path auto complete', func
 
 	expect(2);
 
-	var inputPath = './src/test/resources/list/', autoCompletedPath = './src/test/resources/list/foo'; //./src/test/resources/
+	var inputPath = './src/test/resources/list/f', autoCompletedPath = './src/test/resources/list/foo'; //./src/test/resources/
 
 	DL.ls(inputPath, function onSuccess(fileList){
 		// -1 because contains a new line mark at end of file)
@@ -350,8 +351,8 @@ test( 'DL.ui.doHashChanged - ui changed when url changed', function( assert ) {
 
 });
 
-// Bind events to
-DL.bindEvent();
+// TODO:Bind events to
+// DL.bindEvent();
 
 
 // Send tab key

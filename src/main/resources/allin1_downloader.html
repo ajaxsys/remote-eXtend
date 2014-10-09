@@ -580,7 +580,7 @@ function Downloader(){
 	var $path = $('#path'), $msg = $('#showMessageBar'), $form = $('#cmdForm'), $result = $('#showResult'),
 		$tableTmplt = $('#fileListTemplate'), $rowTmplt = $('#fileListRowTemplate'), $goParent = $('#goParent');
 	var DEFAULT_ACTION = '/dspch';
-	var THIS_URL = SERVER_URL = (location.origin + location.pathname);
+	var THIS_URL = SERVER_URL = (location.protocol + "//" + location.host + location.pathname);
 	var req, _lastReqResult;
 
 	// For test by direct link
@@ -626,10 +626,12 @@ function Downloader(){
 				pushHistory($path.val());
 			}
 
+			// $(this).focus();
 			// Stop original tab event
 			return false;
 		case 13:// Enter
 			$form.submit();
+			// $(this).focus();
 			return false;
 		}
 	}
@@ -690,6 +692,10 @@ function Downloader(){
 	}
 
 	function doAutoComplete(text, thisPath){
+		if (!text || !thisPath){
+			return;
+		}
+
 		var newPath = autoCompleteCmd(text, thisPath);
 
 		if (thisPath!==newPath){

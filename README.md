@@ -1,11 +1,11 @@
-A simple Servlet for local server file browsing & download.
+A simple Servlet for local server file browsing & downloader.
 
 USAGE:
 ---------------
 
-1.Put this jar and H2-1.x.y.jar to your classpath.
+1.Put `remote-eXtend.jar` and `H2-1.x.y.jar` to your classpath.
 
-2.Edit your /WEB-INF/web.xml, add servlet as bellow:
+2.Edit your `/WEB-INF/web.xml`, add servlet as bellow:
 
 		<servlet>
 				<servlet-name>H2Console</servlet-name>
@@ -29,5 +29,10 @@ USAGE:
 				<url-pattern>/dspch/*</url-pattern>
 		</servlet-mapping>
 
-3.Then run your Java Servlet Server (For maven user: `mvn jetty:run`).
-  Now, you can run it on url: `http://localhost:8080/dspch`
+3.Then run your Servlet Server (e.g Tomcat)
+
+  Now, you can visit URL <http://localhost:8080/YOUR_WAR_NAME/dspch> 
+
+  For maven user, run command `mvn jetty:run`, then visit <http://localhost:8080/dspch>
+
+  Check `src/main/resources/download_config.properties` for secure key.
