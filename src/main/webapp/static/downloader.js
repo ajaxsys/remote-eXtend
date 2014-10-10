@@ -66,9 +66,7 @@ function Downloader(){
             $path.data('enableAutoComplete', 'auto');
 
             var subUrl = '#' + encodeURIComponent($path.val());
-            if (window.location.href === THIS_URL + subUrl){
-                showLsFileResult();
-            } else {
+            if (window.location.href !== THIS_URL + subUrl){
                 // show ls command in hash changed event
                 pushHistory($path.val());
             }
@@ -225,31 +223,29 @@ function Downloader(){
     }
 
     function formatLsFileList(text, inputPath) {
-        if (!text) {
-            return null;
-        }
+        var $table = $tableTmplt.clone();
+        $('[id]', $table).removeAttr('id'); // No id in cloned object
 
-        var rows = text.split('\n');
-        // For autocomplete
-        var result = '', $table = $tableTmplt.clone();
+        if (text) {
+            var rows = text.split('\n');
+            for ( var i in rows) {
+                var row = rows[i];
+                var cols = row.split('\t');
+                if (cols.length != 3)
+                    continue;
 
-        for ( var i in rows) {
-            var row = rows[i];
-            var cols = row.split('\t');
-            if (cols.length != 3)
-                continue;
+                var $row=$rowTmplt.clone().removeAttr('id');
+                var filePath = getFullPath(cols[0], inputPath);
 
-            var $row=$rowTmplt.clone().removeAttr('id');
-            var filePath = getFullPath(cols[0], inputPath);
+                $('.fileName', $row).text(cols[0])
+                    .attr('id', 'file_' + i)
+                    .attr('href', filePath)
+                    .click(   doTriggerTab    );
 
-            $('.fileName', $row).text(cols[0])
-                .attr('id', 'file_' + i)
-                .attr('href', filePath)
-                .click(   doTriggerTab    );
-
-            $('.fileSize', $row).text(cols[1]);
-            $('.fileLastModified', $row).text(cols[2]);
-            $table.append($row.show());
+                $('.fileSize', $row).text(cols[1]);
+                $('.fileLastModified', $row).text(cols[2]);
+                $table.append($row.show());
+            }
         }
 
         $result.empty().append($table.show()).show();
