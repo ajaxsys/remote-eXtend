@@ -87,7 +87,7 @@ function Downloader(){
             return false;
         }
 
-        DL.dl($path.val());
+        dl($path.val());
 
         return false;
     }
@@ -275,6 +275,7 @@ function Downloader(){
     }
 
     function pushHistory(href) {
+        $path.val(href); // bugs: While link is clicked directly, doGoParent() will not work
         // Must call from DL!
         // [NG]this.relocate: this==link obj
         // [NG]relocate: always referenct to original relocate, because it's a closure

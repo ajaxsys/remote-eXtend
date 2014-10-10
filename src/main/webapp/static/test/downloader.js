@@ -319,12 +319,22 @@ test( 'DL.ui.util.formatLsFileList - show file list & test link event', function
 
 
 	// test click then url changed.
-	$table2.find('a#file_0').trigger('click');
+	$table2.find('a#file_0').trigger('click'); // A folder link
 	equal( savedMsg  , '#d%3A%2Ftmp%2Ftmp1%2F' , 'url be changed.');
 	savedMsg = null;
 
-	$table2.find('a#file_9').trigger('click');
+	$table2.find('a#file_9').trigger('click'); // A file link
 	equal( savedMsg  , null , 'url NOT be changed, because it is NOT a folder');
+
+	// Test click file then goParent(bugs: cause no url changed, not hash changed, so, $path not be changed)
+	$table2.find('a#file_9').trigger('click'); // A file link
+	var befClickPath = $('#path').val();
+	equal( savedMsg  , null , 'url NOT be changed, because it is NOT a folder( cause no url changed, not hash changed )');
+	// d:/tmp/file.txt --> d:/tmp/
+	DL.ui.doGoParent();
+	equal( savedMsg  , '#d%3A%2Ftmp%2F' , 'url NOT be changed, because it is NOT a folder( cause no url changed, not hash changed )');
+	var aftClickPath = $('#path').val();
+	equal( aftClickPath  , 'd:/tmp/' , 'goParent a file, url not changed, but value should be changed');
 
 });
 
